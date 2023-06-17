@@ -11,7 +11,6 @@ function criaBtnApagar(li){
     li.innerHTML += ' '
     let btnApagar = document.createElement('button')
     btnApagar.innerHTML = 'Apagar'
-    btnApagar.setAttribute('title', 'Apagar esta tarefa')
     btnApagar.setAttribute('class', 'apagar')
     li.appendChild(btnApagar)
 }
@@ -22,6 +21,7 @@ function criaTarefa(textoInput){
     tarefas.appendChild(li)
     criaBtnApagar(li)
     salvarTarefas()
+    limpaImput()
 }
 
 function limpaImput(){
@@ -46,8 +46,8 @@ function addTarefasSalvas(){
     let tarefas = localStorage.getItem('tarefas')
     let listaDeTarefas = JSON.parse(tarefas)
     
-    for(let i of listaDeTarefas){
-        criaTarefa(i)
+    for(let [k, v] of Object.entries(listaDeTarefas) || NaN ){
+        criaTarefa(v)
     }
 }
 addTarefasSalvas()
@@ -55,15 +55,13 @@ addTarefasSalvas()
 inputTarefa.addEventListener('keypress', function(e){
     if(e.keyCode === 13){
         if(!inputTarefa.value) return
-        criaTarefa(inputTarefa.value)
-        limpaImput()
+        criaTarefa(inputTarefa.value) 
     }
 })
 
 btn.addEventListener('click', function(){
     if(!inputTarefa.value) return
     criaTarefa(inputTarefa.value)
-    limpaImput()
 })
 
 document.addEventListener('click', function(e){
