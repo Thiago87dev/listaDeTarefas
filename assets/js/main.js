@@ -46,7 +46,7 @@ function addTarefasSalvas(){
     let tarefas = localStorage.getItem('tarefas')
     let listaDeTarefas = JSON.parse(tarefas)
     
-    for(let [k, v] of Object.entries(listaDeTarefas) || NaN ){
+    for(let [k, v] of Object.entries(listaDeTarefas || NaN )){
         criaTarefa(v)
     }
 }
